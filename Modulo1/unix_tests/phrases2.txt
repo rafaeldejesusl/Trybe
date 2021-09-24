@@ -1,0 +1,7 @@
+brasil
+argentina
+uruguai
+paraguai
+chile
+bolivia
+venezuela
