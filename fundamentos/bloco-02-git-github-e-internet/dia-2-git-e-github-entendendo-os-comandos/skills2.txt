@@ -5,3 +5,5 @@ Github
 CSS
 HTML
 Softskills
+Javascript
+Python
