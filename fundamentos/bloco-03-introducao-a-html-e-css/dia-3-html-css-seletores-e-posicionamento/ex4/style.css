@@ -1,0 +1,25 @@
+div{
+  color: white;
+}
+div:hover{
+  border: 2px solid black;
+}
+.c1{
+  background-color: blue;
+  font-style: italic;
+}
+.c2{
+  background-color: green;
+}
+.c3{
+  background-color: purple;
+  height: 50px;
+  font-style: italic;
+}
+.c4{
+  background-color: darkblue;
+}
+.c5{
+  background-color: lightblue;
+  font-style: italic;
+}
