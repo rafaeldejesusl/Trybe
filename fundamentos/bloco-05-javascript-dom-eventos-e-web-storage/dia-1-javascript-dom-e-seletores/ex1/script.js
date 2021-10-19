@@ -1,0 +1,12 @@
+const title = document.getElementById('header-container');
+title.style.backgroundColor = 'limegreen';
+const rectangle = document.getElementsByClassName('emergency-tasks');
+rectangle[0].style.backgroundColor = 'pink';
+const rectangle2 = document.getElementsByClassName('no-emergency-tasks');
+rectangle2[0].style.backgroundColor = 'yellow';
+const sub = document.querySelectorAll('.emergency-tasks h3');
+sub[0].style.backgroundColor = 'purple';
+sub[1].style.backgroundColor = 'purple';
+const sub2 = document.querySelectorAll('.no-emergency-tasks h3');
+sub2[0].style.backgroundColor = 'black';
+sub2[1].style.backgroundColor = 'black';
