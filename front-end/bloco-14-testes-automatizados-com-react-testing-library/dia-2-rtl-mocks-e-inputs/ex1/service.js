@@ -14,4 +14,10 @@ const stringConcat = (s1, s2) => {
   return s1 + s2;
 }
 
-module.exports = { randomNumber, stringUppercase, stringFirstLetter, stringConcat };
+const fetchDog = async () => {
+  const requisition = await fetch('https://dog.ceo/api/breeds/image/random');
+  const data = await requisition.json();
+  return data;
+}
+
+module.exports = { randomNumber, stringUppercase, stringFirstLetter, stringConcat, fetchDog };

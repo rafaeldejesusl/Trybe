@@ -54,4 +54,20 @@ test('exercicio 4', () => {
   expect(service.stringConcat('Ponte', ' Pre', 'ta')).toBe('Ponte Preta');
   expect(service.stringConcat).toHaveBeenCalled();
   expect(service.stringConcat).toHaveBeenCalledTimes(1);
+  service.stringUppercase.mockRestore();
+  service.stringUppercase = jest.fn().mockImplementation((string) => string.toUpperCase() );
+  expect(service.stringUppercase('Ponte Preta')).toBe('PONTE PRETA');
 })
+
+// exercicio 5
+
+test('exercício 5', () => {
+  service.fetchDog = jest.fn().mockReturnValue('request sucess');
+  expect(service.fetchDog()).toBe('request sucess');
+  expect(service.fetchDog).toBeCalled();
+  expect(service.fetchDog).toHaveBeenCalledTimes(1);
+  service.fetchDog = jest.fn().mockReturnValue('request failed');
+  expect(service.fetchDog()).toBe('request failed');
+  expect(service.fetchDog).toBeCalled();
+  expect(service.fetchDog).toHaveBeenCalledTimes(1);
+});
