@@ -30,7 +30,22 @@ class Student {
         }
         this._trabalho = payload;
     }
+    soma() {
+        const totalProva = this.prova
+            .reduce((previous, current) => previous + current, 0);
+        const totalTrabalho = this.trabalho
+            .reduce((previous, current) => previous + current, 0);
+        return totalProva + totalTrabalho;
+    }
+    media() {
+        const total = this.soma();
+        const quantity = this.prova.length + this.trabalho.length;
+        return Math.round(total / quantity * 100) / 100;
+    }
 }
 const personOne = new Student('202001011', 'Maria da Silva');
-personOne.trabalho = [6, 7, 9];
+personOne.prova = [8, 8, 9, 8];
+personOne.trabalho = [10, 7];
 console.log(personOne);
+console.log(personOne.soma());
+console.log(personOne.media());
