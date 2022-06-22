@@ -1,9 +1,10 @@
 import Enrollable from './enrollable';
+import EvaluationResult from './evaluationResult';
 import Person from './person';
 
 class Student extends Person implements Enrollable {
   private _enrollment: string;
-  private _evaluationsResults: number[] = [];
+  private _evaluationsResults: EvaluationResult[] = [];
 
   constructor(name: string, birthDate: Date) {
     super(name, birthDate);
@@ -21,20 +22,20 @@ class Student extends Person implements Enrollable {
     this._enrollment = value;
   }
 
-  get evaluationsResults(): number[] {
+  get evaluationsResults(): EvaluationResult[] {
     return this._evaluationsResults;
   }
 
-  set evaluationsResults(value: number[]) {
+  set evaluationsResults(value: EvaluationResult[]) {
     this._evaluationsResults = value;
   }
 
   sumGrades(): number {
-    const evaluationSum = this.evaluationsResults.reduce((prev, cur) => prev + cur, 0);
+    const evaluationSum = this.evaluationsResults.reduce((prev, cur) => prev + cur.score, 0);
     return Math.round((evaluationSum) * 100) / 100
   }
 
-  sumAverageGrade() : number {
+  sumAverageGrades() : number {
     const length = this.evaluationsResults.length;
     const sum = this.sumGrades();
     return Math.round(sum / length * 100) / 100;
@@ -46,7 +47,7 @@ class Student extends Person implements Enrollable {
     return `${time}${random}`;
   }
 
-  addEvaluationResult(value: number): void {
+  addEvaluationResult(value: EvaluationResult): void {
     this.evaluationsResults.push(value);
   }
 

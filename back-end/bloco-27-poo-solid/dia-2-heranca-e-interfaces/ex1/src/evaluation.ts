@@ -1,15 +1,15 @@
 import Teacher from "./teacher";
 
-class Evaluation {
+abstract class Evaluation {
   private _score: number;
   private _teacher: Teacher;
-  private _type: 'prova' | 'trabalho';
+  public type: string;
 
-  constructor(score: number, teacher: Teacher, type: 'prova' | 'trabalho') {
-    this.validateScore(score, type);
+  constructor(score: number, teacher: Teacher, type: string) {
+    this.validateScore(score);
     this._score = score;
     this._teacher = teacher;
-    this._type = type;
+    this.type = type;
   }
 
   get score(): number {
@@ -17,7 +17,7 @@ class Evaluation {
   }
   
   set score(value: number) {
-    this.validateScore(value, this.type);
+    this.validateScore(value);
     this._score = value;
   }
   
@@ -29,22 +29,8 @@ class Evaluation {
     this._teacher = value;
   }
 
-  get type(): 'prova' | 'trabalho' {
-    return this._type;
-  }
-
-  set type(value: 'prova' | 'trabalho') {
-    this._type = value;
-  }
-
-  private validateScore(value: number, type: 'prova' | 'trabalho'): void {
+  validateScore(value: number): void {
     if (value < 0) throw new Error('A pontuação não pode ser negativa');
-    if (type === 'prova' && value > 25) {
-      throw new Error('A pontuação caso a avaliação seja do tipo "prova" não pode passar de 25 pontos');
-    }
-    if (type === 'trabalho' && value > 50) {
-      throw new Error('A pontuação caso seja do tipo "trabalho" não pode passar de 50 pontos');
-    }
   }
 
 }
