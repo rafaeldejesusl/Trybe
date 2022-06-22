@@ -15,16 +15,12 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var person_1 = require("./person");
+var employee_1 = require("./employee");
 var Teacher = /** @class */ (function (_super) {
     __extends(Teacher, _super);
     function Teacher(name, birthDate, salary, subject) {
-        var _this = _super.call(this, name, birthDate) || this;
-        _this.validateSalary(salary);
+        var _this = _super.call(this, name, birthDate, salary) || this;
         _this._subject = subject;
-        _this._salary = salary;
-        _this._registration = _this.generateRegistration();
-        _this._admissionDate = new Date();
         return _this;
     }
     Object.defineProperty(Teacher.prototype, "subject", {
@@ -37,56 +33,8 @@ var Teacher = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(Teacher.prototype, "salary", {
-        get: function () {
-            return this._salary;
-        },
-        set: function (value) {
-            this.validateSalary(this.salary);
-            this._salary = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Teacher.prototype, "registration", {
-        get: function () {
-            return this._registration;
-        },
-        set: function (value) {
-            if (value.length < 16) {
-                throw new Error('O registro deve possuir no mínimo 16 caracteres');
-            }
-            this._registration = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Teacher.prototype, "admissionDate", {
-        get: function () {
-            return this._admissionDate;
-        },
-        set: function (value) {
-            var now = new Date();
-            if (value.getTime() > now.getTime()) {
-                throw new Error('A data de admissão não pode ser no futuro');
-            }
-            this._admissionDate = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Teacher.prototype.generateRegistration = function () {
-        var random = Math.floor(Math.random() * 100).toString().padStart(3, '0');
-        var time = parseInt((new Date()).toLocaleString().replace(/[\/,:, ]/gm, ''));
-        return "R".concat(time).concat(random);
-    };
-    Teacher.prototype.validateSalary = function (value) {
-        if (value < 0) {
-            throw new Error('O salário não pode ser negativo');
-        }
-    };
     return Teacher;
-}(person_1.default));
+}(employee_1.default));
 // const math = new Subject('Matemática');
 // const history = new Subject('História');
 // const philosophy = new Subject('Filosofia');

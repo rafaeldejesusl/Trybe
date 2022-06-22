@@ -1,9 +1,10 @@
+import Enrollable from './enrollable';
+import EvaluationResult from './evaluationResult';
 import Person from './person';
 
-class Student extends Person {
+class Student extends Person implements Enrollable {
   private _enrollment: string;
-  private _examsGrades: number[] = [];
-  private _worksGrades: number[] = [];
+  private _evaluationsResults: EvaluationResult[] = [];
 
   constructor(name: string, birthDate: Date) {
     super(name, birthDate);
@@ -21,44 +22,33 @@ class Student extends Person {
     this._enrollment = value;
   }
 
-  get examsGrades(): number[] {
-    return this._examsGrades;
+  get evaluationsResults(): EvaluationResult[] {
+    return this._evaluationsResults;
   }
 
-  set examsGrades(value: number[]) {
-    if (value.length > 4) {
-      throw new Error('A pessoa estudante deve possuir no máximo 4 notas de provas');
-    }
-    this._examsGrades = value;
-  }
-
-  get worksGrades(): number[] {
-    return this._worksGrades;
-  }
-
-  set worksGrades(value: number[]) {
-    if (value.length > 2) {
-      throw new Error('A pessoa estudante deve possuir no máximo 2 notas de trabalhos');
-    }
-    this._worksGrades = value;
+  set evaluationsResults(value: EvaluationResult[]) {
+    this._evaluationsResults = value;
   }
 
   sumGrades(): number {
-    const examsSum = this.examsGrades.reduce((prev, cur) => prev + cur, 0);
-    const worksSum = this.worksGrades.reduce((prev, cur) => prev + cur, 0);
-    return Math.round((examsSum + worksSum) * 100) / 100
+    const evaluationSum = this.evaluationsResults.reduce((prev, cur) => prev + cur.score, 0);
+    return Math.round((evaluationSum) * 100) / 100
   }
 
-  sumAverageGrade() : number {
-    const totalLength = this.examsGrades.length + this.worksGrades.length;
+  sumAverageGrades() : number {
+    const length = this.evaluationsResults.length;
     const sum = this.sumGrades();
-    return Math.round(sum / totalLength * 100) / 100;
+    return Math.round(sum / length * 100) / 100;
   }
 
-  private generateEnrollment(): string {
+  generateEnrollment(): string {
     const random = Math.floor(Math.random() * 100).toString().padStart(3, '0');
     const time = parseInt((new Date()).toLocaleString().replace(/[\/,:, ]/gm, ''))
     return `${time}${random}`;
+  }
+
+  addEvaluationResult(value: EvaluationResult): void {
+    this.evaluationsResults.push(value);
   }
 
 }

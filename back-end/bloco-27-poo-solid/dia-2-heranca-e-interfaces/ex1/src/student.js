@@ -20,8 +20,7 @@ var Student = /** @class */ (function (_super) {
     __extends(Student, _super);
     function Student(name, birthDate) {
         var _this = _super.call(this, name, birthDate) || this;
-        _this._examsGrades = [];
-        _this._worksGrades = [];
+        _this._evaluationsResults = [];
         _this._enrollment = _this.generateEnrollment();
         return _this;
     }
@@ -38,46 +37,32 @@ var Student = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(Student.prototype, "examsGrades", {
+    Object.defineProperty(Student.prototype, "evaluationsResults", {
         get: function () {
-            return this._examsGrades;
+            return this._evaluationsResults;
         },
         set: function (value) {
-            if (value.length > 4) {
-                throw new Error('A pessoa estudante deve possuir no máximo 4 notas de provas');
-            }
-            this._examsGrades = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Student.prototype, "worksGrades", {
-        get: function () {
-            return this._worksGrades;
-        },
-        set: function (value) {
-            if (value.length > 2) {
-                throw new Error('A pessoa estudante deve possuir no máximo 2 notas de trabalhos');
-            }
-            this._worksGrades = value;
+            this._evaluationsResults = value;
         },
         enumerable: false,
         configurable: true
     });
     Student.prototype.sumGrades = function () {
-        var examsSum = this.examsGrades.reduce(function (prev, cur) { return prev + cur; }, 0);
-        var worksSum = this.worksGrades.reduce(function (prev, cur) { return prev + cur; }, 0);
-        return Math.round((examsSum + worksSum) * 100) / 100;
+        var evaluationSum = this.evaluationsResults.reduce(function (prev, cur) { return prev + cur.score; }, 0);
+        return Math.round((evaluationSum) * 100) / 100;
     };
-    Student.prototype.sumAverageGrade = function () {
-        var totalLength = this.examsGrades.length + this.worksGrades.length;
+    Student.prototype.sumAverageGrades = function () {
+        var length = this.evaluationsResults.length;
         var sum = this.sumGrades();
-        return Math.round(sum / totalLength * 100) / 100;
+        return Math.round(sum / length * 100) / 100;
     };
     Student.prototype.generateEnrollment = function () {
         var random = Math.floor(Math.random() * 100).toString().padStart(3, '0');
         var time = parseInt((new Date()).toLocaleString().replace(/[\/,:, ]/gm, ''));
         return "".concat(time).concat(random);
+    };
+    Student.prototype.addEvaluationResult = function (value) {
+        this.evaluationsResults.push(value);
     };
     return Student;
 }(person_1.default));
