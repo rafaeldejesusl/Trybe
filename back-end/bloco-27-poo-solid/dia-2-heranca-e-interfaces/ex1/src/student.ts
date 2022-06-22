@@ -1,6 +1,7 @@
+import Enrollable from './enrollable';
 import Person from './person';
 
-class Student extends Person {
+class Student extends Person implements Enrollable {
   private _enrollment: string;
   private _examsGrades: number[] = [];
   private _worksGrades: number[] = [];
@@ -55,7 +56,7 @@ class Student extends Person {
     return Math.round(sum / totalLength * 100) / 100;
   }
 
-  private generateEnrollment(): string {
+  generateEnrollment(): string {
     const random = Math.floor(Math.random() * 100).toString().padStart(3, '0');
     const time = parseInt((new Date()).toLocaleString().replace(/[\/,:, ]/gm, ''))
     return `${time}${random}`;

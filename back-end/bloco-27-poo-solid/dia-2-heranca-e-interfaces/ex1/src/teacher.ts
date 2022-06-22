@@ -2,19 +2,12 @@ import Person from "./person";
 import Employee from "./employee";
 import Subject from "./subject";
 
-class Teacher extends Person implements Employee {
+class Teacher extends Employee {
   private _subject: Subject;
-  private _salary: number;
-  private _registration: string;
-  private _admissionDate: Date;
 
   constructor(name: string, birthDate: Date, salary: number, subject: Subject) {
-    super(name, birthDate);
-    this.validateSalary(salary);
+    super(name, birthDate, salary);
     this._subject = subject;
-    this._salary = salary;
-    this._registration = this.generateRegistration();
-    this._admissionDate = new Date();
   }
 
   get subject(): Subject {
@@ -23,50 +16,6 @@ class Teacher extends Person implements Employee {
 
   set subject(value: Subject) {
     this._subject = value;
-  }
-
-  get salary(): number {
-    return this._salary;
-  }
-
-  set salary(value: number) {
-    this.validateSalary(this.salary);
-    this._salary = value;
-  }
-
-  get registration(): string {
-    return this._registration;
-  }
-
-  set registration(value: string) {
-    if (value.length < 16) {
-      throw new Error('O registro deve possuir no mínimo 16 caracteres');
-    }
-    this._registration = value;
-  }
-
-  get admissionDate(): Date {
-    return this._admissionDate;
-  }
-
-  set admissionDate(value: Date) {
-    const now = new Date();
-    if (value.getTime() > now.getTime()) {
-      throw new Error('A data de admissão não pode ser no futuro');
-    }
-    this._admissionDate = value;
-  }
-
-  generateRegistration(): string {
-    const random = Math.floor(Math.random() * 100).toString().padStart(3, '0');
-    const time = parseInt((new Date()).toLocaleString().replace(/[\/,:, ]/gm, ''))
-    return `R${time}${random}`;
-  }
-
-  validateSalary(value: number): void {
-    if (value < 0) {
-      throw new Error('O salário não pode ser negativo');
-    }
   }
 
 }
