@@ -1,0 +1,45 @@
+// Exercicio 1
+
+db.bios.findOne({ "_id": 8 });
+
+// Exercicio 2
+
+db.bios.findOne({ "_id": 8 }, { "name": 1 });
+
+// Exercicio 3
+
+db.bios.findOne({ "_id": 8 }, { "name": 1, "birth": 1, "_id": 0 });
+
+// Exercicio 4
+
+db.bios.find({ "name.first": "John" }).pretty();
+
+// Exercicio 5
+
+db.bios.find().limit(3).pretty();
+
+// Exercicio 6
+
+db.bios.find().limit(2).skip(5);
+
+// Importação do json no docker
+
+docker cp mongo.json mongo-container:/mongo.json
+
+docker exec mongo-container mongoimport -d exercicio -c books --file /mongo.json
+
+// Exercicio 7
+
+db.books.countDocuments({});
+
+// Exercicio 8
+
+db.books.countDocuments({ status: "PUBLISH" });
+
+// Exercicio 9
+
+db.books.find({}, { title: 1, isbn: 1, pageCount: 1, _id: 0 }).limit(3);
+
+// Exercicio 10
+
+db.books.find({ status: "MEAP" }, { title: 1, authors: 1, status: 1 }).limit(10).skip(5);
