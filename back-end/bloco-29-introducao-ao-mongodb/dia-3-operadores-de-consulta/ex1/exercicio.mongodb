@@ -1,0 +1,51 @@
+// Exercicio 1
+
+db.movies.find({ category: { $all: ["action", "adventure"] } });
+
+// Exercicio 2
+
+db.movies.find({ category: { $all: ["action", "sci-fi"] }, imdbRating: { $gt: 7 } });
+
+// Exercicio 3
+
+db.movies.find({ ratings: { $elemMatch: { $gt: 103 } } }, { title: 1, ratings: 1, _id: 0 });
+
+// Exercicio 4
+
+db.movies.find({ ratings: { $elemMatch: { $gt: 100, $lt: 105 } } }, { title: 1, ratings: 1, _id: 0 });
+
+// Exercicio 5
+
+db.movies.find({ ratings: { $elemMatch: { $gt: 64, $lt: 105, $mod: [9, 0] } } }, { title: 1, ratings: 1, _id: 0 });
+
+// Exercicio 6
+
+db.movies.find({ category: "adventure", ratings: { $elemMatch: { $gt: 103 } } }, { title: 1, ratings: 1, category: 1, _id: 0 });
+
+// Exercicio 7
+
+db.movies.find({ category: { $size: 2 }}, { _id: 0, title: 1 });
+
+// Exercicio 8
+
+db.movies.find({ ratings: { $size: 4 }}, { _id: 0, title: 1 });
+
+// Exercicio 9
+
+db.movies.find({ category: { $size: 2 }, budget: { $mod: [5, 0] }});
+
+// Exercicio 10
+
+db.movies.find({ $or: [{ category: "sci-fi" }, { ratings: { $gt: 199 } }] }, { title: 1, ratings: 1, category: 1, _id: 0 });
+
+// Exercicio 11
+
+db.movies.find({ ratings: { $size: 4 }, category: { $in: ["adventure", "family"] }, imdbRating: { $not: { $lt: 7 } } });
+
+// Exercicio 12
+
+db.movies.find({ description: { $regex: /^The/ } });
+
+// Exercicio 13
+
+db.movies.find({ description: { $regex: /humanity.$/ } });
