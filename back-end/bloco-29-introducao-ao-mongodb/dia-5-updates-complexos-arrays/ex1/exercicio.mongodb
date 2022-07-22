@@ -1,0 +1,70 @@
+// Exercicio 1
+
+db.movies.updateOne({ title: "Batman" }, { $push: { category: "superhero" } });
+
+// Exercicio 2
+
+db.movies.updateOne({ title: "Batman" }, { $push: { category: { $each: ["villain", "comic-based"] } } });
+
+// Exercicio 3
+
+db.movies.updateOne({ title: "Batman" }, { $pull: { category: "action" } });
+
+// Exercicio 4
+
+db.movies.updateOne({ title: "Batman" }, { $pop: { category: -1 } });
+
+// Exercicio 5
+
+db.movies.updateOne({ title: "Batman" }, { $pop: { category: 1 } });
+
+// Exercicio 6
+
+db.movies.updateOne({ title: "Batman" }, { $addToSet: { category: "action" } });
+
+// Exercicio 7
+
+db.movies.updateMany({ title: { $in: ["Batman", "Home Alone"] } }, { $push: { category: "90's" } });
+
+// Exercicio 8
+
+db.movies.updateOne({ title: "Home Alone" }, { $push: { cast: { $each: [{
+  "actor": "Macaulay Culkin",
+  "character": "Kevin"
+},
+{
+  "actor": "Joe Pesci",
+  "character": "Harry"
+},
+{
+  "actor": "Daniel Stern"
+}] } } });
+
+// Exercicio 9
+
+db.movies.updateOne({ title: "Home Alone" }, { $set: { "cast.$[elemento].character": "Marv" } }, { arrayFilters: [{ "elemento.actor": "Daniel Stern" }] });
+
+// Exercicio 10
+
+db.movies.updateOne({ title: "Batman" }, { $push: { cast: { $each: [{
+  "character": "Batman"
+},
+{
+  "character": "Alfred"
+},
+{
+  "character": "Coringa"
+}] } } });
+
+// Exercicio 11
+
+db.movies.updateOne({ title: "Batman" }, { $set: { "cast.$[elemento].actor": ["Christian Bale"] } }, { arrayFilters: [{ "elemento.character": "Batman" }] });
+
+db.movies.updateOne({ title: "Batman" }, { $set: { "cast.$[elemento].actor": ["Michael Caine"] } }, { arrayFilters: [{ "elemento.character": "Alfred" }] });
+
+db.movies.updateOne({ title: "Batman" }, { $set: { "cast.$[elemento].actor": ["Heath Ledger"] } }, { arrayFilters: [{ "elemento.character": "Coringa" }] });
+
+// Exercicio 12
+
+db.movies.updateOne({ title: "Batman" }, { $push: { "cast.0.actor": { $each: ["Michael Keaton", "Val Kilmer", "George Clooney"], $sort: 1 } } });
+
