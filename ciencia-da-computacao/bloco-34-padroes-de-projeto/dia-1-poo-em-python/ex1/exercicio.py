@@ -1,4 +1,6 @@
+from abc import ABC, abstractmethod
 from collections import Counter
+from math import pi
 
 
 class TV:
@@ -62,3 +64,47 @@ class Estatistica:
     def moda(cls, list):
         result, _ = Counter(list).most_common()[0]
         return result
+
+
+class FiguraGeometrica(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+    @abstractmethod
+    def perimetro(self):
+        pass
+
+
+class Quadrado(FiguraGeometrica):
+    def __init__(self, lado):
+        self.lado = lado
+
+    def area(self):
+        return self.lado * self.lado
+
+    def perimetro(self):
+        return self.lado * 4
+
+
+class Retangulo(FiguraGeometrica):
+    def __init__(self, base, altura):
+        self.base = base
+        self.altura = altura
+
+    def area(self):
+        return self.base * self.altura
+
+    def perimetro(self):
+        return 2 * self.base + 2 * self.altura
+
+
+class Circulo(FiguraGeometrica):
+    def __init__(self, raio):
+        self.raio = raio
+
+    def area(self):
+        return pi * self.raio * self.raio
+
+    def perimetro(self):
+        return 2 * pi * self.raio
